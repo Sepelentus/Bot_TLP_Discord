@@ -1,4 +1,4 @@
-from interactions import Client, Intents, listen, Guild, Message, Role, User
+from interactions import Client, Intents, listen, slash_command, SlashContext
 from interactions.api.events import MessageCreate, MemberAdd
 import os
 import sys
@@ -30,5 +30,9 @@ async def on_join(event: MemberAdd):
     await event.member.add_role(role=1216755690958360637)
 
 token = os.environ.get("TOKEN")
+
+@slash_command(name="obtener_fechas_relevantes", description="entrega las fechas de certamenes y laboratorios", scopes=[1216755690958360636])
+async def send_dates(ctx: SlashContext):
+    await ctx.send("Las fechas a los certamenes son: \n C1: 15/04/2024 \n C2: 27/05/2024 \n Proyecto: 01/07/2024 \n Recordar que todas las semanas (Se supone) hay laboratorios :)")
 
 bot.start(token=token)
